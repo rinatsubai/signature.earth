@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Feedback Form {{ block.super }}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}\
+{% endblock %}
+
+{% block content %}
+<div class="col-sm-8 ml-5">
+    <h1 class="display-3">Feedback</h1>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary btn-block mt-5">Send</button>
+    </form>
+</div>
+{% endblock %}

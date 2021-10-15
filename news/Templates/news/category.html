@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ category.title|capfirst }}: {{ block.super }}
+{% endblock %}
+
+
+{% block sidebar %}
+{% include 'inc/_sidebar.html'%}
+{% endblock %}
+
+{% block content %}
+                {% for item in news %}
+                    <div class="card mb-5 mt-3">
+                        <div class="card-header h5">
+                            <h4> Category: {{item.category|capfirst}} </h4>
+                                                     </div>
+                        <div class="card-body">
+                        <div class=media>
+                            {% if item.photo %}
+                                <img class="rounded mr-5" src="{{ item.photo.url }}" alt="item.photo.url" width="300px">
+                            {% else %}
+                                <img class="rounded mr-5" src="https://i.stack.imgur.com/l60Hf.png" alt="default" width="300px">
+                            {% endif %}
+                            <div class="media-body">
+                                <h3 class="card-title">{{  item.title|capfirst }}</h5>
+                                <p class="card-text">{{  item.content|safe|linebreaks|truncatewords:50  }}</p>
+                                <a href="{{item.get_absolute_url}}" class="btn btn-primary">Read</a>
+                            </div>
+                        </div>
+                            
+                        </div>
+                        <div class="card-footer text-muted">
+                            <p class='text-info'>
+                            {% if item.author %}
+                            Written by @{{ item.author }}
+                            {% else %}
+                            No author
+                            {% endif%}
+                            <small class="text-muted"></br>{{  item.created_at|timesince  }} ago, {{  item.created_at|date:"Y-m-d. H:i"  }}</small></p>
+                        </div>
+                        
+                    </div>
+                {% empty %}
+                    <p>Oops, no articles found.<p>
+                {% endfor %}
+
+            </div>
+{% endblock %}

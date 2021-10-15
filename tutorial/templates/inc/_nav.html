@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand mb-0 h1" href="{%url 'home'%}">Signature.Earth</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    {% comment %} <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Main Page <span class="sr-only">Main Page</span></a> {% endcomment %}
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'add_news' %}">Create Signature <span class="sr-only">Create Aticle</span></a>
+                    </li>
+                    {% endif %}
+                    {% if request.user.is_staff %}
+                    
+                    <li class="nav-item"><a class="nav-link" href="/admin">Admin <span class="sr-only">Admin</span></a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <span class="navbar-text">
+                    {% if request.user.is_authenticated %}
+                        <span class="text-muted mr-2"> Welcome, {{ user.username }}! </span>
+                        <a href="{% url 'logout' %}" class="text-primary mr-5">Logout</a>
+                    {% else %}
+                        <a href="{%url 'register'%}" class="text-primary mr-2">Register</a> <a href="{%url 'login'%}" class="text-secondary mr-5">Login</a>
+                    {% endif %}
+                </span>
+                
+            </div>
+        </nav>
+        
